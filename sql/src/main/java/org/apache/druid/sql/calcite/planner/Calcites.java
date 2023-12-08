@@ -498,7 +498,7 @@ public class Calcites
       case INTEGER:
         return Integer.class;
       case BIGINT:
-        return Long.class;
+        return BigInteger.class;
       case REAL:
         return Float.class;
       case FLOAT:
