@@ -17,14 +17,29 @@
  * under the License.
  */
 
-package org.apache.druid.storage.azure.blob;
+package org.apache.druid.segment.generator;
 
-import com.microsoft.azure.storage.blob.ListBlobItem;
+import org.apache.druid.java.util.common.Intervals;
+import org.apache.druid.timeline.DataSegment;
+import org.junit.Assert;
+import org.junit.Test;
 
-/**
- * Factory for creating {@link ListBlobItemHolder} objects
- */
-public interface ListBlobItemHolderFactory
+import java.util.Collections;
+
+public class GeneratorSchemaInfoTest
 {
-  ListBlobItemHolder create(ListBlobItem blobItem);
+  @Test
+  public void testMakeSegmentDescriptor()
+  {
+    final GeneratorSchemaInfo schemaInfo = new GeneratorSchemaInfo(
+        Collections.emptyList(),
+        Collections.emptyList(),
+        Intervals.ETERNITY,
+        false
+    );
+
+    final DataSegment dataSegment = schemaInfo.makeSegmentDescriptor("foo");
+    Assert.assertEquals("foo", dataSegment.getDataSource());
+    Assert.assertEquals(Intervals.ETERNITY, dataSegment.getInterval());
+  }
 }
